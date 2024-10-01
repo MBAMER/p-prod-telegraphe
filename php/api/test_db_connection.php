@@ -1,9 +1,9 @@
 <?php
     // TODO : A compléter ces variables pour que la connection string devienne opérationnelle.
-    $servername = "";
-    $username = "";
-    $password = "";
-    $dbname = "";
+    $servername = "db:3306";
+    $username = "telegraph_user";
+    $password = "telegraph_pwd";
+    $dbname = "db_telegraph";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

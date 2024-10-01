@@ -1,0 +1,42 @@
+services:
+    nginx:
+        build: ./nginx/
+        ports:
+            - 80:80
+        volumes:
+            - ./php/:/var/www/html/
+        restart: always
+        networks:
+            - frontend
+    php:
+        build: ./php/
+        expose:
+            - 9000
+        volumes:
+            - ./php/:/var/www/html/
+        restart: always
+        networks:
+            - frontend
+            - backend
+    db:    
+        image: mysql:9.0
+        ports:
+            - 3306:3306
+        volumes: 
+            - db_data:/var/lib/mysql
+            - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+        environment:  
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: db_telegraph 
+            MYSQL_USER: telegraphe_user 
+            MYSQL_PASSWORD: telegraphe_pwd
+        restart: always
+        networks:
+            - backend
+
+volumes:
+    db_data:
+    
+networks:
+    backend:
+    frontend:
