@@ -1,7 +1,7 @@
 
 async function readMessages() {
     try {
-        const url = ""; // TODO : A compléter l'URL backend de la fonction pour lire les messages dans la base de données.
+        const url = "http://localhost/api/getMessages.php"; // TODO : A compléter l'URL backend de la fonction pour lire les messages dans la base de données.
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Erreur lors de la récupération des messages.');

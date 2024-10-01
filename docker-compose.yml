@@ -4,7 +4,7 @@ services:
         ports:
             - 80:80
         volumes:
-            - ./php/:/var/www/html/
+            - ./php/:/var/www/html
         restart: always
         networks:
             - frontend
@@ -13,7 +13,7 @@ services:
         expose:
             - 9000
         volumes:
-            - ./php/:/var/www/html/
+            - ./php/:/var/www/html
         restart: always
         networks:
             - frontend
@@ -28,8 +28,8 @@ services:
         environment:  
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: db_telegraph 
-            MYSQL_USER: telegraphe_user 
-            MYSQL_PASSWORD: telegraphe_pwd
+            MYSQL_USER: telegraph_user 
+            MYSQL_PASSWORD: telegraph_pwd
         restart: always
         networks:
             - backend

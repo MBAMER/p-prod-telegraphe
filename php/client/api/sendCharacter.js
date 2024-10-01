@@ -1,5 +1,5 @@
 function sendCharacter(charAscii) {
-    const url = ""; // TODO : A compléter l'URL backend de la fonction pour lire les messages dans la base de données.
+    const url = "http://localhost/api/saveMessage.php"; // TODO : A compléter l'URL backend de la fonction pour lire les messages dans la base de données.
         
     fetch(url, {
         method: 'POST',
