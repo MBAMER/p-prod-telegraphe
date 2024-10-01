@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semaine verte - Télégraphe logiciel</title>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>Télégraphe logiciel</h1>
+    </header>
+
+    <main class="main-content">
+      <section class="telegraph-section">
+        <button id="telegraphButton" aria-label="Telegraph Button"></button>
+        <audio
+          id="telegraphAudio"
+          src="./media/telegraph.mp3"
+          preload="auto"
+        ></audio>
+        <p>Le code Binaire est : <span id="bitsSaved"></span></p>
+        <p>Le caractère ASCII est : <span id="messageASCII"></span></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2024 - Télégraphe logiciel</p>
+    </footer>
+
+    <script src="telegraph.js"></script>
+    <script src="./api/telegraph_api.js"></script>
+    <script src="./api/sendCharacter.js"></script>
+    <script src="./api/readMessages.js"></script>
+  </body>
+</html>
