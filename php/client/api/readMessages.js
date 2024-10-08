@@ -35,11 +35,11 @@ async function readMessages() {
             const row = document.createElement("tr");
 
             const ipCell = document.createElement("td");
-            ipCell.textContent = m.ip;  // Assuming 'm.ip' is the IP address
+            ipCell.textContent = m.mesIPSender;  // Assuming 'm.ip' is the IP address
             row.appendChild(ipCell);
 
             const messageCell = document.createElement("td");
-            messageCell.textContent = m.characters.join('');  // Assuming 'm.characters' is an array of characters
+            messageCell.textContent = convertAsciiToString(m.characters);  // Assuming 'm.characters' is an array of characters
             row.appendChild(messageCell);
 
             table.appendChild(row);
@@ -49,6 +49,19 @@ async function readMessages() {
     } catch (error) {
         console.error('Erreur :', error.message);
     }
+}
+
+function convertAsciiToString(characters) {
+    let string = '';
+    for (let i = 0; i < characters.length; i++) {
+        const char = characters[i];
+        if(!(char == 2 || char == 4)) {
+            console.log("debug 2", char)
+            string += String.fromCharCode(char);
+        }
+    }
+    
+    return string;
 }
 
 // Toutes les 10 secondes, on collecte les message de la base de données.

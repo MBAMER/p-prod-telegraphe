@@ -12,7 +12,13 @@
     </header>
 
     <main class="main-content">
+      <section>
+        <p>Caractère de début (STX): 00000010</p>
+        <p>Caractère de début (EOT): 00000100</p>
+      </section>
       <section class="telegraph-section">
+        <p>Le caractère ASCII est : <span id="charAscii"></span></p>
+        <p>Le caractère est : <span id="char"></span></p><br />
         <button id="telegraphButton" aria-label="Telegraph Button"></button>
         <audio
           id="telegraphAudio"
@@ -20,7 +26,11 @@
           preload="auto"
         ></audio>
         <p>Le code Binaire est : <span id="bitsSaved"></span></p>
-        <p>Le caractère ASCII est : <span id="messageASCII"></span></p>
+        <button id="clearButton" onclick="clear()">effacer</button>
+      
+      </section>
+      <section class="telegraph-messages">
+        <div id="idMessages"></div>
       </section>
     </main>
 
@@ -29,8 +39,9 @@
     </footer>
 
     <script src="telegraph.js"></script>
-    <script src="./api/telegraph_api.js"></script>
+    
     <script src="./api/sendCharacter.js"></script>
+    <script src="./api/telegraph_api.js"></script>
     <script src="./api/readMessages.js"></script>
   </body>
 </html>

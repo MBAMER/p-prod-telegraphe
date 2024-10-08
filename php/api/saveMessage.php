@@ -26,14 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
 
             if ($charAscii == $STX) {
-                $sql = "INSERT INTO t_message (address_ip) VALUES (:mesIPSender)";
+                $sql = "INSERT INTO t_message (adresse_ip) VALUES (:mesIPSender)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':mesIPSender', $ipSender);
                 $stmt->execute();
                 
                 $idMessage = $conn->lastInsertId();
 
-                $sql = "INSERT INTO t_character (message_id, code_ascii) VALUES (:idMessage, :charAscii)";
+                $sql = "INSERT INTO t_caractere (message_id, code_ascii) VALUES (:idMessage, :charAscii)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':idMessage', $idMessage);
                 $stmt->bindParam(':charAscii', $charAscii);
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode(array('message' => 'STX inséré avec succès.', 'idMessage' => $idMessage));
             } 
             else {                
-                $sql = "SELECT message_id FROM t_message WHERE address_ip = :mesIPSender ORDER BY message_id DESC LIMIT 1";
+                $sql = "SELECT message_id FROM t_message WHERE adresse_ip = :mesIPSender ORDER BY message_id DESC LIMIT 1";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':mesIPSender', $ipSender);
                 $stmt->execute();
@@ -51,8 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $idMessage = $row['message_id'];                
 
                     $sql = "SELECT 
-                                (SELECT COUNT(*) FROM t_character WHERE message_id = :idMessage AND code_ascii = :STX) AS nbSTX,
-                                (SELECT COUNT(*) FROM t_character WHERE message_id = :idMessage AND code_ascii = :EOT) AS nbEOT";
+                                (SELECT COUNT(*) FROM t_caractere WHERE message_id = :idMessage AND code_ascii = :STX) AS nbSTX,
+                                (SELECT COUNT(*) FROM t_caractere WHERE message_id = :idMessage AND code_ascii = :EOT) AS nbEOT";
                                 
                     $stmt = $conn->prepare($sql);
                     $stmt->bindParam(':idMessage', $idMessage);
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $nbEOT = $row['nbEOT'];
 
                     if ($nbSTX > 0 && $nbEOT == 0) {
-                        $sql = "INSERT INTO t_character (message_id, code_ascii) VALUES (:idMessage, :charAscii)";
+                        $sql = "INSERT INTO t_caractere (message_id, code_ascii) VALUES (:idMessage, :charAscii)";
                         $stmt = $conn->prepare($sql);
                         $stmt->bindParam(':idMessage', $idMessage);
                         $stmt->bindParam(':charAscii', $charAscii);

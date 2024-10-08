@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         audioLoaded = true;
     });
     
+    const clearButton = document.getElementById('clearButton')
     
     
     
@@ -20,6 +21,11 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         if (!isMouseDownOnButton) { 
             startTimer();
             changeToDown(telegraphButton, telegraphAudio);
+            isMouseDownOnButton = true; 
+        }
+        if (!isMouseDownOnButton) { 
+            startTimer();
+            changeToDown(clearButton);
             isMouseDownOnButton = true; 
         }
 

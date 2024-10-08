@@ -3,7 +3,8 @@ let currentBitPos = 0;
 let bitsSaved = [0, 0, 0, 0, 0, 0, 0, 0];
 let tabAscii = [];
 const bitShow = document.getElementById("bitsSaved");
-const messageASCII = document.getElementById("messageASCII");
+const charAscii = document.getElementById("charAscii");
+const char = document.getElementById("char");
 
 async function playSound(telegraphAudio) {
   telegraphAudio.currentTime = 0;
@@ -56,13 +57,17 @@ function accumulateBits(newBit) {
     bitsSaved[currentBitPos] = newBit;
     currentBitPos++;
 
-    bitShow.innerHTML += newBit += " "; // Montre les bits
+    bitShow.innerHTML += newBit + " "; // Montre les bits
   }
 
   if (currentBitPos === 8) {
     const asciiChar = calculateAscii(bitsSaved);
     console.log("ASCII Character:", asciiChar);
-    messageASCII.innerHTML += asciiChar;
+    console.log("The Character:", String.fromCharCode(asciiChar)); // Converti les décimal en Symbole ASCII
+    charAscii.innerHTML = asciiChar;
+    char.innerHTML = String.fromCharCode(asciiChar);
+
+    sendCharacter(asciiChar);
 
     tabAscii.push(asciiChar); // Add the character to tabAscii array
     console.log("Complete ASCII Message:", tabAscii.join(""));
@@ -74,13 +79,20 @@ function accumulateBits(newBit) {
   }
 }
 
+function clear() {
+  clearBitsSaved(); // Clear pour prochain bit
+  charAscii.innerHTML = "";
+  char.innerHTML = "";
+  bitShow.innerHTML = ""; //Remet à rien les bits
+}
+
 function calculateAscii(bitsArray) {
   /* TODO : A compléter */
   let asciiValue = 0;
   for (let i = 0; i < bitsArray.length; i++) {
     asciiValue += bitsArray[i] * Math.pow(2, 7 - i); // Converti la ligne de binaire en décimal
   }
-  return String.fromCharCode(asciiValue); // Converti les décimal en Symbole ASCII
+  return asciiValue;
 }
 
 if (typeof module !== "undefined" && typeof module.exports !== "undefined") {

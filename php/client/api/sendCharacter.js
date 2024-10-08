@@ -1,13 +1,14 @@
 function sendCharacter(charAscii) {
     const url = "http://localhost/api/saveMessage.php"; // TODO : A compléter l'URL backend de la fonction pour lire les messages dans la base de données.
-        
+    const encodedCharAscii = encodeURIComponent(charAscii);
+    console.log("sendCharacter:", encodedCharAscii);
     fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         // TODO implémenter le body de la méthod (on souhaite envoyer charAscii), il est important d'encoder correctement l'URI
-        body: 'character=${encodeURIComponent(charAscii)}'
+        body: 'charAscii=' + encodedCharAscii
     })
     .then(response => response.text())
     .then(text => {
